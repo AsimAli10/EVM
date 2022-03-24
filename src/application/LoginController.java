@@ -1,4 +1,6 @@
 package application;
+import java.io.IOException;
+
 import javafx.event.ActionEvent;
 import javafx.scene.Node;
 import javafx.fxml.FXML;
@@ -11,11 +13,11 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 //Class name
-//ElectronicVotingMachine EVM;
+//
 //--------
 public class LoginController {
 //login file elements
-	
+	ElectronicVotingMachine EVM=new ElectronicVotingMachine();
 	@FXML
     private TextField EnteredUsername;
 
@@ -53,8 +55,8 @@ public class LoginController {
 
     //function to login
     @FXML
-    void LoginToSystem(ActionEvent event) {
-    	int response=1;//=EVM.authenticateUser(EnteredUsername.getText(),EnteredPassword.getText());//function call
+    void LoginToSystem(ActionEvent event) throws IOException {
+    	int response=EVM.authenticateUser(EnteredUsername.getText(),EnteredPassword.getText());//function call
     	if(response==1)//for admin
     	{
     		try 
@@ -128,13 +130,11 @@ public class LoginController {
     }
 
     @FXML
-    void RegisterNewUser(ActionEvent event) {
+    void RegisterNewUser(ActionEvent event) throws IOException {
     	int response=0;
-    	while(response!=2)
-    	{	
     		if(Password.getText().equals(Password1.getText()))
     		{
-    		response=2;//EVM.RegisterNewUser(Username.getText(),CNIC.getText(),Password.getText());//function call
+    		response=EVM.RegisterNewUser(Username.getText(),CNIC.getText(),Password.getText());//function call
 	    		if(response!=2)
 	    		{
 	    			Username.setText("");
@@ -156,7 +156,7 @@ public class LoginController {
     			Password1.setText("");
     			Exception.setText("Please re-confirms the password!");
     		}	
-    	}
+    	
     	try 
 		{
 			Parent root = FXMLLoader.load(getClass().getResource("UserDashboard.fxml"));
