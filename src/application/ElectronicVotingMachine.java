@@ -1,3 +1,4 @@
+//
 package application;
 
 import java.io.IOException;
@@ -32,3 +33,4 @@ public class ElectronicVotingMachine {
 		System.out.println(c.registerCandidate(c));
 	}*/
 }
+
