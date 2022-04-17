@@ -21,4 +21,14 @@ public class VotersList {
 		return v.RegisterNewUser(username,cNIC,password);
 	}
 
+	public boolean checkVotingStatus(String votercnic) throws IOException {
+		Voter v=new Voter();
+		return v.checkVotingStatus(votercnic);
+	}
+
+	public boolean castVote(String voterid, String candidateid)throws IOException {
+		Voter v=new Voter();
+		return v.castVote(voterid,candidateid);
+	}
+
 }

@@ -19,18 +19,31 @@ public class ElectronicVotingMachine {
 		else return 0;
 		
 	}
+    
+    public int RegisterNewUser(String Username, String CNIC, String Password) throws IOException {
+        return voterslist.RegisterNewUser(Username,CNIC,Password);
+    }
+    
     public int registerCandidate(Candidate candidate) throws IOException {
     	return candidateslist.registerCandidate(candidate); // 0 for baned candidate
     														// 1 for existing candidate
     														// 2 for successful registration
     }
 
-	public int RegisterNewUser(String Username, String CNIC, String Password) throws IOException {
-        return voterslist.RegisterNewUser(Username,CNIC,Password);
-    }
-	/*public static void main(String[] args) throws IOException{
-		Candidate c=new Candidate("Alvin Beidler","174867274","GroupC");
-		System.out.println(c.registerCandidate(c));
-	}*/
+	
+	public boolean checkVotingStatus(String votercnic) throws IOException { // true if eligible
+																			// false if already vote done
+		return voterslist.checkVotingStatus(votercnic);
+		
+	}
+	public boolean castVote(String voterid,String candidateid)throws IOException {
+		
+		return voterslist.castVote(voterid,candidateid);
+		
+	}
+	public static void main(String[] args) throws IOException{
+		ElectronicVotingMachine c=new ElectronicVotingMachine();
+		System.out.println(c.checkVotingStatus("413991860"));
+	}
 }
 

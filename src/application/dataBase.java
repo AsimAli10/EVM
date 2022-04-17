@@ -3,11 +3,17 @@ package application;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+
+import com.opencsv.CSVReader;
+import com.opencsv.CSVWriter;
 
 public class dataBase {
 	
@@ -236,6 +242,106 @@ public class dataBase {
 	    bw.close();
 		return true;
 	}
+	public boolean checkVotingStatus(String cnic) throws IOException {
+		
+		String fileName = "C:\\Users\\bbl\\git\\EVM\\src\\application\\voters.csv";
+		List<List<String>> list = new ArrayList<List<String>>();
+		BufferedReader br = new BufferedReader(new FileReader(fileName));
+		String line = br.readLine();
+		String[] headers = line.split(",");
+		for(String header: headers) {
+		    List<String> subList = new ArrayList<String>();
+		    subList.add(header);
+		    list.add(subList);
+		}
+		while((line = br.readLine()) != null) {
+		    String[] elems = line.split(",");
+		    for(int i = 0; i < elems.length; i++) {
+		        list.get(i).add(elems[i]);
+		    }
+		}
+		br.close();
+		int rows = list.size();
+		int cols = list.get(0).size();
+		String[][] array2D = new String[rows][cols];
+		for(int row = 0; row < rows; row++) {
+		    for(int col = 0; col < cols; col++) {
+		        array2D[row][col] = list.get(row).get(col);
+		    }
+		} 
+		
+		for(int col = 0; col < cols; col++) {
+		        if(array2D[0][col].equals(cnic) && array2D[3][col].equals("0") )
+		        {
+		        	
+		        	return true;
+		        }
+		        	
+		    }
+		
+		return false;
+	}
+	
+	
+	private boolean updateVotingStatus(String cnic) throws IOException {
+        File inputFile = new File("C:\\Users\\bbl\\git\\EVM\\src\\application\\voters.csv");
+
+        // Read existing file
+        CSVReader reader = new CSVReader(new FileReader(inputFile), ',');
+        List<String[]> csvBody = reader.readAll();
+        // get CSV row column and replace with by using row and column
+        for(int i=0; i<csvBody.size(); i++){
+            String[] strArray = csvBody.get(i);
+            for(int j=0; j<strArray.length; j++){
+                if(strArray[j].equalsIgnoreCase(cnic)){ //String to be replaced
+                    csvBody.get(i)[3] = "1"; //Target replacement
+                    break;
+                }
+            }
+        }
+        reader.close();
+
+        // Write to CSV file which is open
+        CSVWriter writer = new CSVWriter(new FileWriter(inputFile), ',');
+        writer.writeAll(csvBody);
+        writer.flush();
+        writer.close();
+        return true;
+    }
+	private boolean updatecandidatevotecount(String candidateid) throws IOException {
+		File inputFile = new File("C:\\Users\\bbl\\git\\EVM\\src\\application\\candidates.csv");
+
+        // Read existing file
+        CSVReader reader = new CSVReader(new FileReader(inputFile), ',');
+        List<String[]> csvBody = reader.readAll();
+        // get CSV row column and replace with by using row and column
+        for(int i=0; i<csvBody.size(); i++){
+            String[] strArray = csvBody.get(i);
+            for(int j=0; j<strArray.length; j++){
+                if(strArray[j].equalsIgnoreCase(candidateid)){ //String to be replaced
+                    int votes=Integer.parseInt(csvBody.get(i)[3]); //Target replacement
+                    votes+=1;
+                    csvBody.get(i)[3]=Integer.toString(votes);
+                    break;
+                }
+            }
+        }
+        reader.close();
+
+        // Write to CSV file which is open
+        CSVWriter writer = new CSVWriter(new FileWriter(inputFile), ',');
+        writer.writeAll(csvBody);
+        writer.flush();
+        writer.close();
+        return true;
+		
+	}
+	public boolean castVote(String voterid, String candidateid) throws IOException {
+		
+		return updateVotingStatus(voterid) && updatecandidatevotecount(candidateid);
+	}
+	
+	
 
 }
 

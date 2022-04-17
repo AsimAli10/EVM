@@ -17,6 +17,16 @@ public class Voter {
 		
 		return db.RegisterNewUser(username,cNIC,password);
 	}
+
+	public boolean checkVotingStatus(String votercnic) throws IOException {
+		dataBase db=new dataBase();
+		return db.checkVotingStatus(votercnic);
+	}
+
+	public boolean castVote(String voterid, String candidateid) throws IOException {
+		dataBase db=new dataBase();
+		return db.castVote(voterid,candidateid);
+	}
 	
 	
 
