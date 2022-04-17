@@ -43,7 +43,8 @@ public class ElectronicVotingMachine {
 	}
 	public static void main(String[] args) throws IOException{
 		ElectronicVotingMachine c=new ElectronicVotingMachine();
-		System.out.println(c.checkVotingStatus("413991860"));
+		Candidate can=new Candidate("Marlin","563151682","GroupD");
+		System.out.println(c.checkVotingStatus("132263824"));
 	}
 }
 

@@ -234,7 +234,7 @@ public class dataBase {
 		return true;
 	}
 	public boolean registerCandidate(Candidate candidate) throws IOException {
-		String str= candidate.getName()+","+candidate.getId()+","+candidate.getGroup();
+		String str= candidate.getName()+","+candidate.getId()+","+candidate.getGroup()+",0";
 		FileWriter fw = new FileWriter("C:\\Users\\bbl\\git\\EVM\\src\\application\\candidates.csv", true);
 	    BufferedWriter bw = new BufferedWriter(fw);
 	    bw.write(str);
@@ -271,9 +271,15 @@ public class dataBase {
 		} 
 		
 		for(int col = 0; col < cols; col++) {
-		        if(array2D[0][col].equals(cnic) && array2D[3][col].equals("0") )
+			
+			
+			String string=array2D[0][col];
+			string = string.replaceAll("^\"|\"$", "");
+			String string2=array2D[3][col];
+			string2 = string2.replaceAll("^\"|\"$", "");
+			//System.out.println(string2);
+		        if(string.equals(cnic) && string2.equals("0") )
 		        {
-		        	
 		        	return true;
 		        }
 		        	
