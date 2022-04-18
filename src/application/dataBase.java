@@ -47,8 +47,13 @@ public class dataBase {
 		} 
 		
 		for(int col = 0; col < cols; col++) {
-		        if(array2D[0][col].equals(username)&&(array2D[1][col].equals(password)))
+			String string=array2D[0][col];
+			string = string.replaceAll("^\"|\"$", "");
+			String string2=array2D[1][col];
+			string2 = string2.replaceAll("^\"|\"$", "");
+		        if(string.equals(username)&&(string2.equals(password)))
 		        {
+		        	//System.out.println("bshcgbjh");
 		        	return 2;
 		        }
 		        	
