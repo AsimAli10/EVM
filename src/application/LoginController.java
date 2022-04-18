@@ -57,7 +57,7 @@ public class LoginController {
     //function to login
     @FXML
     void LoginToSystem(ActionEvent event) throws IOException {
-    	int response=EVM.authenticateUser(EnteredUsername.getText(),EnteredPassword.getText());//function call
+    	int response=2;//EVM.authenticateUser(EnteredUsername.getText(),EnteredPassword.getText());//function call
     	if(response==1)//for admin
     	{
     		try 
@@ -135,7 +135,7 @@ public class LoginController {
     	int response=0;
     		if(Password.getText().equals(Password1.getText()))
     		{
-    		response=EVM.RegisterNewUser(Username.getText(),CNIC.getText(),Password.getText());//function call
+    			response=0;//EVM.RegisterNewUser(Username.getText(),CNIC.getText(),Password.getText());//function call
 	    		if(response!=2)
 	    		{
 	    			Username.setText("");
@@ -151,25 +151,27 @@ public class LoginController {
 	    				Exception.setText("User has already registered!");
 	    			}
 	    		}
+	    		else
+	    		{
+	    			try 
+	    			{
+	    				Parent root = FXMLLoader.load(getClass().getResource("UserDashboard.fxml"));
+	    				Stage primaryStage = new Stage();
+	    				primaryStage.setTitle("User Dashboard");
+	    				primaryStage.setScene(new Scene(root));
+	    				primaryStage.show();
+	    				((Node)(event.getSource())).getScene().getWindow().hide();
+	    				
+	    			} catch(Exception e) {
+	    				e.printStackTrace();
+	    			}
+	    		}
     		}
-    		else
-    		{
-    			Password1.setText("");
-    			Exception.setText("Please re-confirms the password!");
-    		}	
-    	
-    	try 
-		{
-			Parent root = FXMLLoader.load(getClass().getResource("UserDashboard.fxml"));
-			Stage primaryStage = new Stage();
-			primaryStage.setTitle("User Dashboard");
-			primaryStage.setScene(new Scene(root));
-			primaryStage.show();
-			((Node)(event.getSource())).getScene().getWindow().hide();
-			
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
+	    	else
+	    	{
+	    		Password1.setText("");
+	    		Exception.setText("Please re-confirms the password!");
+	    	}	
     }
 
 }
