@@ -57,7 +57,8 @@ public class LoginController {
     //function to login
     @FXML
     void LoginToSystem(ActionEvent event) throws IOException {
-    	int response=2;//EVM.authenticateUser(EnteredUsername.getText(),EnteredPassword.getText());//function call
+    	int response=EVM.authenticateUser(EnteredUsername.getText(),EnteredPassword.getText());//function call
+    	System.out.println(response);
     	if(response==1)//for admin
     	{
     		try 
