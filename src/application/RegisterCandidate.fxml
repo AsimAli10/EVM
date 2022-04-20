@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="400.0" style="-fx-background-color: #E0DDAA;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.LoginController">
+   <children>
+      <TextField fx:id="candidateUsername" layoutX="80.0" layoutY="181.0" prefHeight="32.0" prefWidth="240.0" promptText="Name" style="-fx-background-radius: 60; -fx-border-color: #203239; -fx-border-radius: 60;">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </TextField>
+      <Button fx:id="Register" layoutX="200.0" layoutY="365.0" mnemonicParsing="false" onAction="#RegisterACandidate" prefHeight="32.0" prefWidth="106.0" style="-fx-background-color: #141E27; -fx-background-radius: 60;" text="Register" textFill="WHITE">
+         <font>
+            <Font name="Calibri Bold" size="15.0" />
+         </font></Button>
+      <TextField fx:id="candidategroup" accessibleRole="PASSWORD_FIELD" layoutX="80.0" layoutY="286.0" prefHeight="32.0" prefWidth="240.0" promptText="Group" style="-fx-background-radius: 60; -fx-border-color: #203239; -fx-border-radius: 60;">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </TextField>
+      <Button fx:id="Back" layoutX="87.0" layoutY="365.0" mnemonicParsing="false" onAction="#BackToAdminPage" prefHeight="32.0" prefWidth="106.0" style="-fx-background-color: #141E27; -fx-background-radius: 60;" text="Back" textFill="WHITE">
+         <font>
+            <Font name="Calibri Bold" size="15.0" />
+         </font>
+      </Button>
+      <TextField fx:id="candidateCNIC" layoutX="80.0" layoutY="234.0" prefHeight="32.0" prefWidth="240.0" promptText="CNIC" style="-fx-background-radius: 60; -fx-border-color: #203239; -fx-border-radius: 60;">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </TextField>
+      <Text layoutX="87.0" layoutY="147.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Register Candidate" textAlignment="CENTER">
+         <font>
+            <Font name="Bell MT" size="29.0" />
+         </font>
+      </Text>
+      <Pane layoutX="-7.0" prefHeight="58.0" prefWidth="407.0" style="-fx-background-color: #141E27;">
+         <children>
+            <Text fill="WHITE" layoutX="14.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="E-Voting System" textAlignment="CENTER" wrappingWidth="400.0">
+               <font>
+                  <Font name="Bell MT" size="29.0" />
+               </font>
+            </Text>
+         </children>
+      </Pane>
+      <Label fx:id="candidateException" layoutX="87.0" layoutY="326.0" textFill="RED">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

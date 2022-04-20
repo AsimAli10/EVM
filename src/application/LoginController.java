@@ -21,14 +21,12 @@ public class LoginController {
 	ElectronicVotingMachine EVM=new ElectronicVotingMachine();
 	@FXML
     private TextField EnteredUsername;
-
     @FXML
     private TextField EnteredPassword;
     @FXML
     private Label invalidCredentials;
     @FXML
     private Button login;
-
     @FXML
     private Button Signup;
     
@@ -50,10 +48,18 @@ public class LoginController {
 
     @FXML
     private Label Exception;
-
     @FXML
     private TextField Password1;
-
+    
+    @FXML
+    private TextField candidateUsername;
+    @FXML
+    private TextField candidategroup;
+    @FXML
+    private TextField candidateCNIC;
+    @FXML
+    private Label candidateException;
+    
     //function to login
     @FXML
     void LoginToSystem(ActionEvent event) throws IOException {
@@ -174,5 +180,114 @@ public class LoginController {
 	    		Exception.setText("Please re-confirms the password!");
 	    	}	
     }
+    @FXML
+    void MoveToRegisterACandidate(ActionEvent event) {
+    	try 
+		{
+			Parent root = FXMLLoader.load(getClass().getResource("RegisterCandidate.fxml"));
+			Stage primaryStage = new Stage();
+			primaryStage.setTitle("Admin Dashboard");
+			primaryStage.setScene(new Scene(root));
+			primaryStage.show();
+			((Node)(event.getSource())).getScene().getWindow().hide();
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+    }
+    @FXML
+    void BackToAdminPage(ActionEvent event) {
+    	try 
+		{
+			Parent root = FXMLLoader.load(getClass().getResource("AdminDashboard.fxml"));
+			Stage primaryStage = new Stage();
+			primaryStage.setTitle("Admin Dashboard");
+			primaryStage.setScene(new Scene(root));
+			primaryStage.show();
+			((Node)(event.getSource())).getScene().getWindow().hide();
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+    }
 
+    @FXML
+    void RegisterACandidate(ActionEvent event) throws IOException {
+    	Candidate C=new Candidate(candidateUsername.getText(),candidateCNIC.getText(),candidategroup.getText());
+    	int response=EVM.registerCandidate(C);
+    	if(response==0)
+    	{
+    		candidateException.setText("You are banned!");
+    		candidateUsername.setText("");
+    		candidateCNIC.setText("");
+    		candidategroup.setText("");
+    	}
+    	else if(response==1)
+    	{
+    		candidateException.setText("Candidate Already exist!");
+    		candidateUsername.setText("");
+    		candidateCNIC.setText("");
+    		candidategroup.setText("");
+    	}
+    	else
+    	{
+    		try 
+    		{
+    			Parent root = FXMLLoader.load(getClass().getResource("AdminDashboard.fxml"));
+    			Stage primaryStage = new Stage();
+    			primaryStage.setTitle("Admin Dashboard");
+    			primaryStage.setScene(new Scene(root));
+    			primaryStage.show();
+    			((Node)(event.getSource())).getScene().getWindow().hide();
+    			
+    		} catch(Exception e) {
+    			e.printStackTrace();
+    		}
+    	}
+    }
+    @FXML
+    private Label VotingStatusLabel;
+    @FXML
+    private TextField CNICToBeChecked;
+    @FXML
+    void CheckVotingStatus(ActionEvent event) throws IOException {
+    	try 
+		{
+			Parent root = FXMLLoader.load(getClass().getResource("VotingStatus.fxml"));
+			Stage primaryStage = new Stage();
+			primaryStage.setTitle("User Dashboard");
+			primaryStage.setScene(new Scene(root));
+			primaryStage.show();
+			((Node)(event.getSource())).getScene().getWindow().hide();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+    }
+    @FXML
+    void CheckStatus(ActionEvent event) throws IOException {
+    	boolean status=EVM.checkVotingStatus(CNICToBeChecked.getText());
+    	if(status==true)
+    	{
+    		VotingStatusLabel.setText("You are eligible to vote!");
+    	}
+    	else
+    	{
+    		VotingStatusLabel.setText("You are not eligible to vote");
+    	}
+    }
+    @FXML
+    void MoveToUserDashboard(ActionEvent event) {
+    	try 
+		{
+			Parent root = FXMLLoader.load(getClass().getResource("UserDashboard.fxml"));
+			Stage primaryStage = new Stage();
+			primaryStage.setTitle("User Dashboard");
+			primaryStage.setScene(new Scene(root));
+			primaryStage.show();
+			((Node)(event.getSource())).getScene().getWindow().hide();
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+    }
 }

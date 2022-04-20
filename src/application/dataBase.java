@@ -20,7 +20,7 @@ public class dataBase {
 	public int checkLogin(String username, String password) throws IOException {
 		
 		
-		String fileName = "C:\\Users\\bbl\\git\\EVM\\src\\application\\voters.csv";
+		String fileName = "src\\application\\voters.csv";
 		List<List<String>> list = new ArrayList<List<String>>();
 		BufferedReader br = new BufferedReader(new FileReader(fileName));
 		String line = br.readLine();
@@ -66,7 +66,7 @@ public class dataBase {
 	private String checkinNadra(String cnic, String password) throws IOException
 	{
 		
-		String fileName = "C:\\Users\\bbl\\git\\EVM\\src\\application\\NADRA.csv";
+		String fileName = "src\\application\\NADRA.csv";
 		List<List<String>> list = new ArrayList<List<String>>();
 		BufferedReader br = new BufferedReader(new FileReader(fileName));
 		String line = br.readLine();
@@ -112,7 +112,7 @@ public class dataBase {
 				String row=this.checkinNadra(cNIC,password);
 				if(row!=null)
 				{
-					FileWriter fw = new FileWriter("C:\\Users\\bbl\\git\\EVM\\src\\application\\voters.csv", true);
+					FileWriter fw = new FileWriter("src\\application\\voters.csv", true);
 				    BufferedWriter bw = new BufferedWriter(fw);
 				    bw.write(row);
 				    bw.newLine();
@@ -126,7 +126,7 @@ public class dataBase {
 	private boolean checkinVoters(String cnic ) throws IOException
 	{
 		
-		String fileName = "C:\\Users\\bbl\\git\\EVM\\src\\application\\voters.csv";
+		String fileName = "src\\application\\voters.csv";
 		List<List<String>> list = new ArrayList<List<String>>();
 		BufferedReader br = new BufferedReader(new FileReader(fileName));
 		String line = br.readLine();
@@ -164,7 +164,7 @@ public class dataBase {
 		return false;
 	}
 	public boolean checkNotAllowedCandidate(Candidate c) throws IOException {
-		String fileName = "C:\\Users\\bbl\\git\\EVM\\src\\application\\banedCandidates.csv";
+		String fileName = "src\\application\\banedCandidates.csv";
 		List<List<String>> list = new ArrayList<List<String>>();
 		BufferedReader br = new BufferedReader(new FileReader(fileName));
 		String line = br.readLine();
@@ -198,7 +198,7 @@ public class dataBase {
 		return true;
 	}
 	public boolean checkExistingCandidate(Candidate c) throws IOException {
-		String fileName = "C:\\Users\\bbl\\git\\EVM\\src\\application\\candidates.csv";
+		String fileName = "src\\application\\candidates.csv";
 		List<List<String>> list = new ArrayList<List<String>>();
 		BufferedReader br = new BufferedReader(new FileReader(fileName));
 		String line = br.readLine();
@@ -240,7 +240,7 @@ public class dataBase {
 	}
 	public boolean registerCandidate(Candidate candidate) throws IOException {
 		String str= candidate.getName()+","+candidate.getId()+","+candidate.getGroup()+",0";
-		FileWriter fw = new FileWriter("C:\\Users\\bbl\\git\\EVM\\src\\application\\candidates.csv", true);
+		FileWriter fw = new FileWriter("src\\application\\candidates.csv", true);
 	    BufferedWriter bw = new BufferedWriter(fw);
 	    bw.write(str);
 	    bw.newLine();
@@ -249,7 +249,7 @@ public class dataBase {
 	}
 	public boolean checkVotingStatus(String cnic) throws IOException {
 		
-		String fileName = "C:\\Users\\bbl\\git\\EVM\\src\\application\\voters.csv";
+		String fileName = "src\\application\\voters.csv";
 		List<List<String>> list = new ArrayList<List<String>>();
 		BufferedReader br = new BufferedReader(new FileReader(fileName));
 		String line = br.readLine();
@@ -295,7 +295,7 @@ public class dataBase {
 	
 	
 	private boolean updateVotingStatus(String cnic) throws IOException {
-        File inputFile = new File("C:\\Users\\bbl\\git\\EVM\\src\\application\\voters.csv");
+        File inputFile = new File("src\\application\\voters.csv");
 
         // Read existing file
         CSVReader reader = new CSVReader(new FileReader(inputFile), ',');
@@ -320,7 +320,7 @@ public class dataBase {
         return true;
     }
 	private boolean updatecandidatevotecount(String candidateid) throws IOException {
-		File inputFile = new File("C:\\Users\\bbl\\git\\EVM\\src\\application\\candidates.csv");
+		File inputFile = new File("src\\application\\candidates.csv");
 
         // Read existing file
         CSVReader reader = new CSVReader(new FileReader(inputFile), ',');
