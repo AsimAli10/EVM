@@ -4,13 +4,18 @@ package application;
 import java.io.IOException;
 
 public class ElectronicVotingMachine {
-	
+	String CurentUser;
 	VotersList voterslist=new VotersList();
 	CandidatesList candidateslist = new CandidatesList();
     public int authenticateUser(String Username, String Password) throws IOException {
     	if(this.authenticatAdmin(Username,Password)==1)
     		return 1;
-		return voterslist.authenticateUser( Username,  Password);
+		if(voterslist.authenticateUser( Username,  Password)>0)
+		{
+			CurentUser=Username;
+			return voterslist.authenticateUser( Username,  Password);
+		}
+		else return voterslist.authenticateUser( Username,  Password);
     }
 
     public int authenticatAdmin(String username, String password) {
