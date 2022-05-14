@@ -9,4 +9,14 @@ public class CandidatesList {
 	public int registerCandidate(Candidate candidate) throws IOException {
 		return candidate.registerCandidate(candidate);
 	}
+
+	public String getCandidates() throws IOException {
+		dataBase db = new dataBase();
+		return db.getCandidates();
+	}
+
+	public Candidate checkWinner() throws IOException {
+		dataBase db = new dataBase();
+		return db.checkWinner();
+	}
 }

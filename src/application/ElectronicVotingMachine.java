@@ -43,13 +43,25 @@ public class ElectronicVotingMachine {
 	}
 	public boolean castVote(String voterid,String candidateid)throws IOException {
 		
-		return voterslist.castVote(voterid,candidateid);
+		if(this.checkVotingStatus(voterid))
+			return voterslist.castVote(voterid,candidateid);
+		else return false;
 		
+	}
+	public String getCandidates() throws IOException
+	{
+		return candidateslist.getCandidates();
+		
+	}
+	public Candidate checkWinner() throws IOException// return winner candidate details
+	{													// return null if no one wins
+		return this.candidateslist.checkWinner();
 	}
 	public static void main(String[] args) throws IOException{
 		ElectronicVotingMachine c=new ElectronicVotingMachine();
-		
-		System.out.println(c.authenticateUser("132263824", "1234"));
+		Candidate can=c.checkWinner();
+		System.out.println(can.getVotes());
 	}
+
 }
 

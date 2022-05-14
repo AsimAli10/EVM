@@ -7,12 +7,26 @@ public class Candidate {
     String name;
     String id;
     String group;
+    int votes;
     public Candidate(String n, String Id, String grp){
         name=n;
         id=Id;
         group=grp;
+        
+        
     }
-    public int registerCandidate(Candidate candidate) throws IOException
+    public int getVotes()
+    {
+    	return votes;
+    }
+    public void setVotes(int v)
+    {
+    	this.votes=v;
+    }
+    public Candidate() {
+		// TODO Auto-generated constructor stub
+	}
+	public int registerCandidate(Candidate candidate) throws IOException
     {
         if(this.checkNotAllowedCandidate(candidate))
         {
