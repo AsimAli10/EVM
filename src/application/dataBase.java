@@ -363,6 +363,7 @@ public String getCandidates() throws IOException {
         List<String[]> csvBody = reader.readAll();
         // get CSV row column and replace with by using row and column
         String content = new String();
+        content="Name        \tID                 \tGroup\n";
         for(int i=0; i<csvBody.size(); i++){
             String[] strArray = csvBody.get(i);
             for(int j=0;j<strArray.length-1;j++) {

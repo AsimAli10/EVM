@@ -19,7 +19,7 @@ import javafx.stage.Stage;
 public class LoginController {
 //login file elements
 	ElectronicVotingMachine EVM=new ElectronicVotingMachine();
-	String CurrentUser="";
+	static String CurrentUser="";
 	@FXML
     private TextField EnteredUsername;
     @FXML
@@ -147,6 +147,7 @@ public class LoginController {
 
     @FXML
     void RegisterNewUser(ActionEvent event) throws IOException {
+    	CurrentUser=CNIC.getText();
     	if(Username.getText()==""||CNIC.getText()==""||Password.getText()=="")
     		Exception.setText("Enter Valid Values!");
     	else
@@ -172,7 +173,7 @@ public class LoginController {
 	    		}
 	    		else
 	    		{
-	    			CurrentUser=CNIC.getText();
+	    			
 	    			try 
 	    			{
 	    				Parent root = FXMLLoader.load(getClass().getResource("UserDashboard.fxml"));
@@ -286,6 +287,7 @@ public class LoginController {
     }
     @FXML
     void CheckStatus(ActionEvent event) throws IOException {
+    	System.out.println(CurrentUser+"hey");
     	boolean status=EVM.checkVotingStatus(CurrentUser);
     	if(status==true)
     	{
@@ -344,9 +346,10 @@ public class LoginController {
     	}
     	else
     	{
+    		System.out.println(CurrentUser);
     		boolean response=EVM.castVote(CurrentUser,CandidateID.getText());
     		if(response==false)
-    			Warningforcandidate.setText("Enter a Valid ID");
+    			Warningforcandidate.setText("You are not eligible");
     		else
     		{
     			try 
@@ -386,7 +389,7 @@ public class LoginController {
     		//System.out.print(data);
 			Parent root = FXMLLoader.load(getClass().getResource("Winner.fxml"));
 			Stage primaryStage = new Stage();
-			primaryStage.setTitle("User Dashboard");
+			primaryStage.setTitle("Admin Dashboard");
 			primaryStage.setScene(new Scene(root));
 			primaryStage.show();
 			((Node)(event.getSource())).getScene().getWindow().hide();
