@@ -17,7 +17,7 @@
       </TextField>
       <Button fx:id="Register" layoutX="200.0" layoutY="419.0" mnemonicParsing="false" onAction="#RegisterNewUser" prefHeight="32.0" prefWidth="106.0" style="-fx-background-color: #141E27; -fx-background-radius: 60;" text="Register" textFill="WHITE">
          <font>
-            <Font name="Calibri Bold" size="15.0" />
+            <Font name="Century Gothic" size="16.0" />
          </font></Button>
       <TextField fx:id="Password" accessibleRole="PASSWORD_FIELD" layoutX="80.0" layoutY="286.0" prefHeight="32.0" prefWidth="240.0" promptText="Password" style="-fx-background-radius: 60; -fx-border-color: #203239; -fx-border-radius: 60;">
          <font>
@@ -26,7 +26,7 @@
       </TextField>
       <Button fx:id="Back" layoutX="87.0" layoutY="419.0" mnemonicParsing="false" onAction="#BackToLoginPage" prefHeight="32.0" prefWidth="106.0" style="-fx-background-color: #141E27; -fx-background-radius: 60;" text="Back" textFill="WHITE">
          <font>
-            <Font name="Calibri Bold" size="15.0" />
+            <Font name="Century Gothic" size="16.0" />
          </font>
       </Button>
       <TextField fx:id="CNIC" layoutX="80.0" layoutY="234.0" prefHeight="32.0" prefWidth="240.0" promptText="CNIC" style="-fx-background-radius: 60; -fx-border-color: #203239; -fx-border-radius: 60;">

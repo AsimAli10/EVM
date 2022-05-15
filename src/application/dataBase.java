@@ -353,11 +353,30 @@ public class dataBase {
 		
 		return updateVotingStatus(voterid) && updatecandidatevotecount(candidateid);
 	}
-	public String getCandidates() throws IOException {
-		Path inputFile = Path.of("src\\application\\candidates.csv");
-		String content = Files.readString(inputFile);
-		content=content.replace('"', '\0');
-		content=content.replaceAll(",","    ");
+public String getCandidates() throws IOException {
+		
+		
+		File inputFile = new File("src\\application\\candidates.csv");
+
+        // Read existing file
+        CSVReader reader = new CSVReader(new FileReader(inputFile), ',');
+        List<String[]> csvBody = reader.readAll();
+        // get CSV row column and replace with by using row and column
+        String content = new String();
+        for(int i=0; i<csvBody.size(); i++){
+            String[] strArray = csvBody.get(i);
+            for(int j=0;j<strArray.length-1;j++) {
+            	
+            	content+=strArray[j];
+            	if(j==0)
+            		content+="	";
+            	content+="	";
+            }
+            content+="\n";
+            content=content.replace('"', '\0');
+    		content=content.replaceAll(",","	");
+        }
+		
 		return content;
 	}
 	public Candidate checkWinner() throws IOException {

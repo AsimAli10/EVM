@@ -19,21 +19,21 @@
             </Text>
          </children>
       </Pane>
-      <Text layoutX="95.0" layoutY="113.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Status verification">
+      <Text layoutX="149.0" layoutY="125.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Results">
          <font>
             <Font name="Century Gothic Bold" size="24.0" />
          </font>
       </Text>
-      <Button layoutX="96.0" layoutY="218.0" mnemonicParsing="false" onAction="#CheckStatus" prefHeight="43.0" prefWidth="185.0" style="-fx-background-color: #141E27; -fx-border-radius: 60; -fx-background-radius: 60;" text="Check Status" textFill="WHITE">
+      <Button layoutX="104.0" layoutY="218.0" mnemonicParsing="false" onAction="#ShowWinner" prefHeight="43.0" prefWidth="185.0" style="-fx-background-color: #141E27; -fx-border-radius: 60; -fx-background-radius: 60;" text="Show Winner" textFill="WHITE">
          <font>
             <Font name="Century Gothic" size="16.0" />
          </font></Button>
-      <Label fx:id="VotingStatusLabel" layoutX="44.0" layoutY="152.0" prefHeight="32.0" prefWidth="305.0" textAlignment="CENTER">
+      <Label fx:id="WinnerLabel" layoutX="44.0" layoutY="152.0" prefHeight="32.0" prefWidth="316.0" textAlignment="CENTER">
          <font>
             <Font name="Century Gothic" size="20.0" />
          </font>
       </Label>
-      <Button layoutX="96.0" layoutY="288.0" mnemonicParsing="false" onAction="#MoveToUserDashboard" prefHeight="43.0" prefWidth="185.0" style="-fx-background-color: #141E27; -fx-border-radius: 60; -fx-background-radius: 60;" text="Back " textFill="WHITE">
+      <Button layoutX="104.0" layoutY="274.0" mnemonicParsing="false" onAction="#BackToAdminPage" prefHeight="43.0" prefWidth="185.0" style="-fx-background-color: #141E27; -fx-border-radius: 60; -fx-background-radius: 60;" text="Main Menu" textFill="WHITE">
          <font>
             <Font name="Century Gothic" size="16.0" />
          </font>

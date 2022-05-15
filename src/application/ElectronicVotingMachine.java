@@ -4,7 +4,7 @@ package application;
 import java.io.IOException;
 
 public class ElectronicVotingMachine {
-	String CurentUser;
+	String CurentUser="";
 	VotersList voterslist=new VotersList();
 	CandidatesList candidateslist = new CandidatesList();
     public int authenticateUser(String Username, String Password) throws IOException {

@@ -27,6 +27,16 @@
          <font>
             <Font name="Century Gothic" size="16.0" />
          </font></Button>
+      <Button layoutX="85.0" layoutY="269.0" mnemonicParsing="false" onAction="#Exit" prefHeight="43.0" prefWidth="209.0" style="-fx-background-color: #141E27; -fx-border-radius: 60; -fx-background-radius: 60;" text="Exit" textFill="WHITE">
+         <font>
+            <Font name="Century Gothic" size="16.0" />
+         </font>
+      </Button>
+      <Button layoutX="85.0" layoutY="207.0" mnemonicParsing="false" onAction="#MovetoShowWinner" prefHeight="43.0" prefWidth="209.0" style="-fx-background-color: #141E27; -fx-border-radius: 60; -fx-background-radius: 60;" text="Show Winner" textFill="WHITE">
+         <font>
+            <Font name="Century Gothic" size="16.0" />
+         </font>
+      </Button>
      
    </children>
 </AnchorPane>

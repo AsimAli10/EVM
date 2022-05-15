@@ -19,6 +19,7 @@ import javafx.stage.Stage;
 public class LoginController {
 //login file elements
 	ElectronicVotingMachine EVM=new ElectronicVotingMachine();
+	String CurrentUser="";
 	@FXML
     private TextField EnteredUsername;
     @FXML
@@ -63,44 +64,51 @@ public class LoginController {
     //function to login
     @FXML
     void LoginToSystem(ActionEvent event) throws IOException {
-    	int response=EVM.authenticateUser(EnteredUsername.getText(),EnteredPassword.getText());//function call
-    	System.out.println(response);
-    	if(response==1)//for admin
-    	{
-    		try 
-			{
-				Parent root = FXMLLoader.load(getClass().getResource("AdminDashboard.fxml"));
-				Stage primaryStage = new Stage();
-				primaryStage.setTitle("Admin Operations");
-				primaryStage.setScene(new Scene(root));
-				primaryStage.show();
-				((Node)(event.getSource())).getScene().getWindow().hide();
-				
-			} catch(Exception e) {
-				e.printStackTrace();
-			}
-    	}
-    	else if(response==2)//for user
-    	{
-    		try 
-			{
-				Parent root = FXMLLoader.load(getClass().getResource("UserDashboard.fxml"));
-				Stage primaryStage = new Stage();
-				primaryStage.setTitle("User Dashboard");
-				primaryStage.setScene(new Scene(root));
-				primaryStage.show();
-				((Node)(event.getSource())).getScene().getWindow().hide();
-				
-			} catch(Exception e) {
-				e.printStackTrace();
-			}
-    	}
+    	if(EnteredUsername.getText()==""||EnteredPassword.getText()=="")
+    		invalidCredentials.setText("Enter valid values.");
     	else
     	{
-    		EnteredUsername.setText("");
-			EnteredPassword.setText("");
-			invalidCredentials.setText("Invalid credentials. Please try again.");
+    		int response=EVM.authenticateUser(EnteredUsername.getText(),EnteredPassword.getText());//function call
+        	System.out.println(response);
+        	if(response==1)//for admin
+        	{
+        		try 
+    			{
+    				Parent root = FXMLLoader.load(getClass().getResource("AdminDashboard.fxml"));
+    				Stage primaryStage = new Stage();
+    				primaryStage.setTitle("Admin Operations");
+    				primaryStage.setScene(new Scene(root));
+    				primaryStage.show();
+    				((Node)(event.getSource())).getScene().getWindow().hide();
+    				
+    			} catch(Exception e) {
+    				e.printStackTrace();
+    			}
+        	}
+        	else if(response==2)//for user
+        	{
+        		CurrentUser=EnteredUsername.getText();
+        		try 
+    			{
+    				Parent root = FXMLLoader.load(getClass().getResource("UserDashboard.fxml"));
+    				Stage primaryStage = new Stage();
+    				primaryStage.setTitle("User Dashboard");
+    				primaryStage.setScene(new Scene(root));
+    				primaryStage.show();
+    				((Node)(event.getSource())).getScene().getWindow().hide();
+    				
+    			} catch(Exception e) {
+    				e.printStackTrace();
+    			}
+        	}
+        	else
+        	{
+        		EnteredUsername.setText("");
+    			EnteredPassword.setText("");
+    			invalidCredentials.setText("Invalid credentials. Please try again.");
+        	}
     	}
+    	
     }
 
     @FXML
@@ -139,10 +147,14 @@ public class LoginController {
 
     @FXML
     void RegisterNewUser(ActionEvent event) throws IOException {
-    	int response=0;
+    	if(Username.getText()==""||CNIC.getText()==""||Password.getText()=="")
+    		Exception.setText("Enter Valid Values!");
+    	else
+    	{
+    		int response=0;
     		if(Password.getText().equals(Password1.getText()))
     		{
-    			response=0;//EVM.RegisterNewUser(Username.getText(),CNIC.getText(),Password.getText());//function call
+    			EVM.RegisterNewUser(Username.getText(),CNIC.getText(),Password.getText());//function call
 	    		if(response!=2)
 	    		{
 	    			Username.setText("");
@@ -160,6 +172,7 @@ public class LoginController {
 	    		}
 	    		else
 	    		{
+	    			CurrentUser=CNIC.getText();
 	    			try 
 	    			{
 	    				Parent root = FXMLLoader.load(getClass().getResource("UserDashboard.fxml"));
@@ -179,6 +192,8 @@ public class LoginController {
 	    		Password1.setText("");
 	    		Exception.setText("Please re-confirms the password!");
 	    	}	
+    	}
+    		
     }
     @FXML
     void MoveToRegisterACandidate(ActionEvent event) {
@@ -213,44 +228,50 @@ public class LoginController {
 
     @FXML
     void RegisterACandidate(ActionEvent event) throws IOException {
-    	Candidate C=new Candidate(candidateUsername.getText(),candidateCNIC.getText(),candidategroup.getText());
-    	int response=EVM.registerCandidate(C);
-    	if(response==0)
-    	{
-    		candidateException.setText("You are banned!");
-    		candidateUsername.setText("");
-    		candidateCNIC.setText("");
-    		candidategroup.setText("");
-    	}
-    	else if(response==1)
-    	{
-    		candidateException.setText("Candidate Already exist!");
-    		candidateUsername.setText("");
-    		candidateCNIC.setText("");
-    		candidategroup.setText("");
-    	}
+    	if(candidateUsername.getText()==""||candidateCNIC.getText()==""||candidategroup.getText()=="")
+    		candidateException.setText("Enter Valid Values");
     	else
     	{
-    		try 
-    		{
-    			Parent root = FXMLLoader.load(getClass().getResource("AdminDashboard.fxml"));
-    			Stage primaryStage = new Stage();
-    			primaryStage.setTitle("Admin Dashboard");
-    			primaryStage.setScene(new Scene(root));
-    			primaryStage.show();
-    			((Node)(event.getSource())).getScene().getWindow().hide();
-    			
-    		} catch(Exception e) {
-    			e.printStackTrace();
-    		}
+    		Candidate C=new Candidate(candidateUsername.getText(),candidateCNIC.getText(),candidategroup.getText());
+        	int response=EVM.registerCandidate(C);
+        	if(response==0)
+        	{
+        		candidateException.setText("This candidate is banned!");
+        		candidateUsername.setText("");
+        		candidateCNIC.setText("");
+        		candidategroup.setText("");
+        	}
+        	else if(response==1)
+        	{
+        		candidateException.setText("Candidate Already exist!");
+        		candidateUsername.setText("");
+        		candidateCNIC.setText("");
+        		candidategroup.setText("");
+        	}
+        	else
+        	{
+        		try 
+        		{
+        			Parent root = FXMLLoader.load(getClass().getResource("AdminDashboard.fxml"));
+        			Stage primaryStage = new Stage();
+        			primaryStage.setTitle("Admin Dashboard");
+        			primaryStage.setScene(new Scene(root));
+        			primaryStage.show();
+        			((Node)(event.getSource())).getScene().getWindow().hide();
+        			
+        		} catch(Exception e) {
+        			e.printStackTrace();
+        		}
+        	}
     	}
+    	
     }
     @FXML
     private Label VotingStatusLabel;
     @FXML
     private TextField CNICToBeChecked;
     @FXML
-    void CheckVotingStatus(ActionEvent event) throws IOException {
+    void gotoCheckStatus(ActionEvent event) throws IOException {
     	try 
 		{
 			Parent root = FXMLLoader.load(getClass().getResource("VotingStatus.fxml"));
@@ -265,7 +286,7 @@ public class LoginController {
     }
     @FXML
     void CheckStatus(ActionEvent event) throws IOException {
-    	boolean status=EVM.checkVotingStatus(CNICToBeChecked.getText());
+    	boolean status=EVM.checkVotingStatus(CurrentUser);
     	if(status==true)
     	{
     		VotingStatusLabel.setText("You are eligible to vote!");
@@ -289,5 +310,99 @@ public class LoginController {
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
+    }
+    @FXML
+    private Label AllCandidates;
+    @FXML
+    void gotoVoteCast(ActionEvent event) throws IOException {
+    	
+    	try 
+		{
+    		//System.out.print(data);
+			Parent root = FXMLLoader.load(getClass().getResource("CastVote.fxml"));
+			Stage primaryStage = new Stage();
+			primaryStage.setTitle("User Dashboard");
+			primaryStage.setScene(new Scene(root));
+			primaryStage.show();
+			((Node)(event.getSource())).getScene().getWindow().hide();
+			
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+    	
+    }
+    @FXML
+    private TextField CandidateID;
+    @FXML
+    private Label Warningforcandidate;
+    @FXML
+    void CastVote(ActionEvent event) throws IOException {
+    	if(CandidateID.getText()=="")
+    	{
+    		Warningforcandidate.setText("Enter a Valid ID");
+    	}
+    	else
+    	{
+    		boolean response=EVM.castVote(CurrentUser,CandidateID.getText());
+    		if(response==false)
+    			Warningforcandidate.setText("Enter a Valid ID");
+    		else
+    		{
+    			try 
+        		{
+            		//System.out.print(data);
+        			Parent root = FXMLLoader.load(getClass().getResource("Successfulvote.fxml"));
+        			Stage primaryStage = new Stage();
+        			primaryStage.setTitle("User Dashboard");
+        			primaryStage.setScene(new Scene(root));
+        			primaryStage.show();
+        			((Node)(event.getSource())).getScene().getWindow().hide();
+        			
+        			
+        		} catch(Exception e) {
+        			e.printStackTrace();
+        		}
+    		}
+    		
+    	}
+    	
+    }
+    @FXML
+    void ShowCandidates(ActionEvent event) throws IOException {
+    	String data=EVM.getCandidates();
+    	AllCandidates.setText(data);
+    }
+    @FXML
+    void Exit(ActionEvent event) {
+    	System.exit(0);
+		
+    	
+    }
+    @FXML
+    void MovetoShowWinner(ActionEvent event) {
+    	try 
+		{
+    		//System.out.print(data);
+			Parent root = FXMLLoader.load(getClass().getResource("Winner.fxml"));
+			Stage primaryStage = new Stage();
+			primaryStage.setTitle("User Dashboard");
+			primaryStage.setScene(new Scene(root));
+			primaryStage.show();
+			((Node)(event.getSource())).getScene().getWindow().hide();
+			
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+    }
+    @FXML
+    private Label WinnerLabel;
+    @FXML
+    void ShowWinner(ActionEvent event) throws IOException {
+    	Candidate win=EVM.checkWinner();
+    	String Win=win.getName();
+    	Win+=" is the winner";
+    	WinnerLabel.setText(Win);
     }
 }
